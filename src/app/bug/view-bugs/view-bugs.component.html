@@ -1,0 +1,73 @@
+<app-progress-mask [showProgress]="showProgressBar"></app-progress-mask>
+<nav class="navbar navbar-light bg-light col-sm-10 my-4">
+  <span class="navbar-brand mb-0 h1">List of all Bugs</span>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-10">
+        <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Bug# <a href="#" (click)="sort($event,'bugId')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                  <th scope="col">Title <a href="#" (click)="sort($event,'title')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                  <th scope="col">Description <a href="#" (click)="sort($event,'description')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                  <th scope="col">Status <a href="#" (click)="sort($event,'statusEntity')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                  <th scope="col">Importance <a href="#" (click)="sort($event,'importanceEntity')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                  <th scope="col">Created On <a href="#" (click)="sort($event,'createdOn')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bug of bugs">
+                  <td><a [routerLink]="['/bug/VIEW',bug.bugId]">{{bug.bugId}}</a></td>
+                  <td>{{bug.title}}</td>
+                  <td>{{bug.description}}</td>
+                  <td>{{bug.statusDescription}}</td>
+                  <td  [class.text-success]="bug.importanceDescription==='Low'"
+                  [class.text-primary]="bug.importanceDescription==='Medium'"
+                  [class.text-warning]="bug.importanceDescription==='High'"
+                  [class.text-danger]="bug.importanceDescription==='Critical'"
+                  >{{bug.importanceDescription}}</td>
+                  <td>{{bug.createdOn | date}}</td>
+                  <td><a href="#" (click)="delete($event,bug.bugId)"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+    <div class="col-sm-2 text-right pr-6">
+      <div><p><a [routerLink]="['/bug', 'ADD']" routerLinkActive="active">Report a Bug</a></p></div>
+      <div class="my-4"> 
+        <p>{{allbugsCount.openBugs}} Open Bugs</p>
+        <p>{{allbugsCount.newBugs}} New Bugs</p>
+        <p>{{allbugsCount.criticalBugs}} Critical Bugs</p>
+        <p>{{allbugsCount.highBugs}}  High Bugs</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-10 text-left">
+      <nav aria-label="Page navigation">
+        <ul class="pagination pagination-sm">
+          <li class="page-item">
+            <a class="page-link" href="#" (click)="previous($event)">
+              <i class="fa fa-backward" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="page-item" [class.active]="p==currentPage" *ngFor="let p of pageArray">
+            <a class="page-link" href="#" (click)="gotoPage($event,p)">{{p}}</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#" (click)="next($event)">
+              <i class="fa fa-forward" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-sm-10 text-right">Page {{currentPage}} of {{totalPages}}</div>
+  </div>
+</div> 
+

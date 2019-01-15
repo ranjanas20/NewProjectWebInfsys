@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-sm navbar-dark  bg-dark sticky-top">
+  <!--<a class="navbar-brand h1" href="#">Bug-Site</a>-->
+
+  <a class="navbar-brand h1" href="#"><i class="fa fa-bug"></i> BUG-SITE</a>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/signup" routerLinkActive="active">Sign up</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+    </li>
+  </ul>
+
+</nav>
+
+<div class="container-fluid px-4 my-2 bg-light">
+
+<nav class="nav nav-pills nav-fill">
+    <a class="nav-item nav-link py-3" routerLink="/home" routerLinkActive="active">Overview</a>
+    <a class="nav-item nav-link py-3" routerLink="/viewbugs" routerLinkActive="active">Bugs <span class="badge badge-pill badge-danger ml-3">{{bugsCount}}</span></a>
+    <a class="nav-item nav-link py-3" routerLink="/viewMilestones" routerLinkActive="active">Milestones <span class="badge badge-pill badge-primary ml-3">3</span></a>
+    <a class="nav-item nav-link py-3" routerLink="/viewqa" routerLinkActive="active">Q/A <span class="badge badge-pill badge-primary ml-3">300</span></a>
+    <div class="row my-2">
+        <div class="col-sm-8"> <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </div>
+        <div class="col-sm-4 pl-0"> <button type="button" class="btn btn-dark"><i class="fa fa-search"></i> </button></div>
+      </div>
+  </nav>
+  </div>

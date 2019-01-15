@@ -1,0 +1,46 @@
+<div class="my-4 px-2">
+  <div class="row justify-content-between">
+    <div class="col-sm-4">
+      <p>Bug-Site contains the information of bugs reported on the website-app.web.com.
+      It also has the features like Report a Bug, Ask a Question, Follow a Question,
+        bookmark the anwers, Map/ Track Milestones.</p>
+    </div>
+    <div class="col-sm-4 text-right ">
+      <p><a [routerLink]="['/bug', 'ADD']" routerLinkActive="active">Report a Bug</a></p>
+      <p><a routerLink="/bug" routerLinkActive="active">Add Milestone</a></p>
+      <p><a routerLink="/bug" routerLinkActive="active">Ask a Question?</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="row px-2">
+  <div class="col-sm-4">
+    <app-faq></app-faq>
+  </div>
+  <div class="col-sm-4">
+    <div class="card h-100">
+      <div class="card-body card-block">
+        <h6 class="card-title">
+            <div class="row container-fluid">
+                <div>Latest Bugs Reported</div>
+                <div class="text-right ml-auto"><a routerLink="/viewbugs" routerLinkActive="active" class="card-link">All Bugs</a></div>
+              </div>
+        </h6>
+        <app-top-bugs></app-top-bugs>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card h-100">
+      <div class="card-body card-block">
+          <h6 class="card-title">
+              <div class="row container-fluid">
+                  <div>Milestones</div>
+                  <div class="text-right ml-auto"><a routerLink="/viewMilestones" routerLinkActive="active" class="card-link">All Milestones</a></div>
+                </div>
+          </h6>
+        <p class="card-text">Under construction...</p>
+      </div>
+    </div>
+  </div>
+</div>

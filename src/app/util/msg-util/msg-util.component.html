@@ -1,0 +1,7 @@
+<div class="alert alert-dismissible fade show"  [class.alert-danger]="messageTypeError" [class.alert-success]="!messageTypeError" [class.d-none]="!showMessage" [class.d-block]="showMessage" role="alert"
+  #alertBox>
+  {{messageText}}
+  <button type="button" class="close" (click)="hideAlert()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

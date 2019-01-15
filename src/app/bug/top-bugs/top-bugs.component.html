@@ -1,0 +1,3 @@
+<div class="row" *ngFor="let bug of bugs">
+  <div class="col-sm-12"><p><a [routerLink]="['/bug/VIEW',bug.bugId]" routerLinkActive="active">Bug#{{bug.bugId}}: {{bug.title}}, {{bug.description}}</a></p></div>
+</div>

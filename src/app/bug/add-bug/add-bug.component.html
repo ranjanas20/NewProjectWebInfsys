@@ -1,0 +1,139 @@
+
+<div *ngIf="modeAddEditView=='ADD' || modeAddEditView=='EDIT'" class="ml-2">
+<nav class="navbar navbar-light bg-light col-sm-6 my-4">
+  <span *ngIf="modeAddEditView=='ADD'" class="navbar-brand mb-0 h1">Report a Bug</span>
+  <span *ngIf="modeAddEditView=='EDIT'" class="navbar-brand mb-0 h1">Edit Bug</span>
+</nav>
+<div class="col-sm-6">
+  <app-msg-util [messageText]="message" [showMessage]="showMessage" (msgHidden)="onMessageHidden()"></app-msg-util>
+</div>
+<app-progress-mask [showProgress]="showProgressBar"></app-progress-mask>
+<form [formGroup]="bugForm">
+    <div class="form-group row">
+      <label for="title" class="col-sm-1 col-form-label">Title</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" formControlName="title" placeholder="Title" required>
+        <!--validations for title -->
+        <div *ngIf="title.invalid && (title.dirty || title.touched)"
+          class="help-block text-danger">
+          <div *ngIf="title.errors.required">
+            Title is required.
+          </div>
+          <div *ngIf="title.errors.minlength">
+            Title must be at least 3 characters long.
+          </div>
+          <div *ngIf="title.errors.maxlength">
+            Title must not be more than 255 characters long.
+          </div>
+        </div>
+        <!--ends validations for title -->
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <label for="description" class="col-sm-1 col-form-label">Description</label>
+      <div class="col-sm-5">
+        <textarea class="form-control" rows="3" formControlName="description" placeholder="Description" required></textarea>
+        <!--validations for description -->
+        <div *ngIf="description.invalid && (description.dirty || description.touched)"
+          class="help-block text-danger">
+          <div *ngIf="description.errors.required">
+            Description is required.
+          </div>
+          <div *ngIf="description.errors.minlength">
+            Description must be at least 10 characters long.
+          </div>
+          <div *ngIf="description.errors.maxlength">
+            Description must not be more than 255 characters long.
+          </div>
+        </div>
+        <!--ends validations for description -->
+      </div>
+    </div>
+    <div class="form-group row">
+        <label for="status" class="col-sm-1 col-form-label">Status</label>
+        <div  class="col-sm-5">
+          <select class="custom-select"  id="status" class="form-control" formControlName="status">
+            <option *ngFor="let st of statusList | async" [value]="st.statusCode">
+                {{st.statusDescription}}
+            </option>
+          </select>
+          <!--validations for status -->
+          <div *ngIf="status.invalid && (status.dirty || status.touched)"
+            class="help-block text-danger">
+            <div *ngIf="status.errors.required">
+              Status is required.
+            </div>
+          </div>
+          <!--ends validations for status -->
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="importance" class="col-sm-1 col-form-label">Importance</label>
+        <div  class="col-sm-5">
+          <select class="custom-select" id="importance" class="form-control" formControlName="importance">
+            <option *ngFor="let imp of importanceList | async" [value]="imp.importanceCode">
+                {{imp.importanceDescription}}
+            </option>
+          </select>
+          <!--validations for importance -->
+          <div *ngIf="importance.invalid && (importance.dirty || importance.touched)"
+            class="help-block text-danger">
+            <div *ngIf="importance.errors.required">
+              Importance is required.
+            </div>
+          </div>
+          <!--ends validations for importance -->
+        </div>
+    </div>
+    <div class="form-group row my-4">
+      <div *ngIf="modeAddEditView=='ADD'" class="col-sm-7">
+        <button type="submit" class="btn btn-primary mr-4" (click)="onSubmit('SaveNew')" [disabled]="!bugForm.valid">Save & New</button>
+        <button type="submit" class="btn btn-primary" (click)="onSubmit('SaveDisplay')" [disabled]="!bugForm.valid">Save & Display</button>
+      </div>
+      <div *ngIf="modeAddEditView=='EDIT'" class="col-sm-7">
+        <button type="submit" class="btn btn-primary mr-4" (click)="onUpdate()" [disabled]="!bugForm.valid"><i class="fa fa-save"></i> Save</button>
+        <button type="button" class="btn btn-secondary" (click)="onEditCancelPressed()">Cancel</button>
+
+      </div>
+    </div>
+</form>
+</div>
+
+
+<div *ngIf="modeAddEditView=='VIEW'" class="ml-2">
+<nav class="navbar navbar-light bg-light col-sm-6 my-4">
+  <span class="navbar-brand mb-0 h1">View Bug</span>
+</nav>
+<div class="container-fluid text-left">
+  <div class="row">
+    <div class="col-sm-1 font-weight-bold">Bug Id:</div>
+    <div class="col-sm-5">{{bug.bugId}}</div>
+  </div>
+  <div class="row my-2">
+    <div class="col-sm-1 font-weight-bold">Title:</div>
+    <div class="col-sm-5">{{bug.title}}</div>
+  </div>
+  <div class="row my-2">
+    <div class="col-sm-1 font-weight-bold">Description:</div>
+    <div class="col-sm-5">{{bug.description}}</div>
+  </div>
+  <div class="row my-2">
+    <div class="col-sm-1 font-weight-bold">Status:</div>
+    <div class="col-sm-5">{{bug.statusDescription}}</div>
+  </div>
+  <div class="row my-2">
+    <div class="col-sm-1 font-weight-bold">Importance:</div>
+    <div class="col-sm-5">{{bug.importanceDescription}}</div>
+  </div>
+</div>
+<div class="row my-4">
+    <div class="col-sm-6">
+        <button type="submit" class="btn btn-primary mx-4" (click)="onEditPressed()"> <i class="fa fa-edit"></i> Edit</button>
+        <button type="button" class="btn btn-secondary" (click)="onCancelPressed()">Cancel</button>
+    </div>
+</div>
+</div>
+  
+  
+  
